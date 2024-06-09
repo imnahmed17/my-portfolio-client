@@ -1,0 +1,20 @@
+.dashboard__layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+.layout-group {
+    flex: 1 1 0%;
+}
+
+.outlet {
+    padding: 1.25rem;
+}
+
+/*=============== BREAKPOINTS ===============*/
+/* For medium devices */
+@media screen and (max-width: 768px) {
+    .dashboard__layout {
+        flex-direction: column;
+    }
+}

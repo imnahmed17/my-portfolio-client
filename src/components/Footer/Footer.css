@@ -1,0 +1,36 @@
+footer {
+    border-top: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.footer__container {
+    height: calc(var(--header-height) + 1.5rem);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer__social {
+    display: flex;
+    gap: 1rem;
+}
+
+.footer__social-icon {
+    font-size: 2rem;
+    color: var(--title-color);
+}
+
+.footer__social-icon:hover {
+    color: var(--title-color-dark);
+}
+
+/*=============== BREAKPOINTS ===============*/
+/* For medium devices */
+@media screen and (max-width: 576px) {
+    .footer__social {
+        gap: 0.25rem;
+    }
+    
+    .footer__social-icon {
+        font-size: 1.25rem;
+    }
+}
