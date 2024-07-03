@@ -1,0 +1,38 @@
+.login__container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form__container {
+    padding: 24px;
+    min-width: 384px;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    border-radius: 6px;
+}
+
+.title__div {
+    margin-bottom: 32px;
+    text-align: center;
+}
+
+.login__title {
+    margin-bottom: 10px;
+    font-size: 36px;
+    font-weight: 700;
+}
+
+.login__sub_title {
+    font-size: 14px;
+    color: rgb(156 163 175);
+}
+
+/* For small devices */
+@media screen and (max-width: 350px) {
+    .form__container {
+        padding: 40px;
+    }
+}

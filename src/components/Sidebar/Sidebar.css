@@ -50,6 +50,8 @@
 }
 
 .sidebar__container {
+    position: fixed;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -106,9 +108,14 @@
     border-color: black;
 }
 
-.sidebar-nav__item {
-    padding: 0.75rem 1rem;
-    border: 2px solid black;
+.sidebar-nav__button-container {
+    position: absolute;
+    bottom: 1.25rem;
+    width: 94%;
+}
+
+.sidebar-nav__button {
+    width: 100%;
 }
 
 /*=============== BREAKPOINTS ===============*/

@@ -1,12 +1,8 @@
 import { useEffect } from 'react';
 import './App.css';
-import About from './components/About/About';
-import Contact from './components/Contact/Contact';
 import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
-import Home from './components/Home/Home';
-import Projects from './components/Projects/Projects';
-import Skills from './components/Skills/Skills';
+import { Outlet } from 'react-router-dom';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
@@ -18,12 +14,8 @@ function App() {
   return (
     <>
       <Header />
-      <main className='main'>
-        <Home />
-        <About />
-        <Skills />
-        <Projects />
-        <Contact />
+      <main className='main outlet__container'>
+        <Outlet />
       </main>
       <Footer />
     </>

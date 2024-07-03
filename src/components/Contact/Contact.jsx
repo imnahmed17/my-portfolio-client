@@ -37,6 +37,10 @@ const Contact = () => {
                                 <input type='email' name='email' className='contact__form-input' placeholder='Enter your email' required />
                             </div>
                         </div>
+                        <div className='contact__form-div'>
+                            <label className='contact__form-tag'>Subject</label>
+                            <input type='text' name='subject' className='contact__form-input' placeholder='Enter your email subject' required />
+                        </div>
                         <div className='contact__form-div contact__form-area'>
                             <label className='contact__form-tag'>Message</label>
                             <textarea name='message' cols='30' rows='10' className='contact__form-input' placeholder='Write your message here...' required></textarea>

@@ -1,7 +1,34 @@
+import { useState } from 'react';
 import toast from 'react-hot-toast';
+import { useAddProjectMutation } from '../../../redux/features/project/projectApi';
 import './AddProject.css';
 
 const AddProject = () => {
+    const [addProject, result ] = useAddProjectMutation();
+    const [tags, setTags] = useState([]);
+
+    const handleTags = (e) => {
+        const value = e.target.value;
+        const newTag = value.trim();
+        
+        if ((e.key === 'Enter' || e.key === 'Tab' || e.key === ',' || e.key === ' ') && newTag.length && !tags.includes(newTag)){
+            e.preventDefault();
+
+            setTags([...tags, newTag]);
+            e.target.value = '';
+        }
+    };
+
+    const removeTag = (index) => {
+        setTags(tags.filter((el, i) => i !== index));
+    };
+
+    const checkKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+        }
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -11,23 +38,20 @@ const AddProject = () => {
             category: form.category.value,
             gitLink: form.gitLink.value,
             liveLink: form.liveLink.value,
-            imageUrl: form.imageUrl.value
+            imageUrl: form.imageUrl.value,
+            tags: tags
         };
 
-        fetch('https://my-portfolio-server-bay.vercel.app/projects', {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json',
-            },
-            body: JSON.stringify(projectData)
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                if (data.insertedId) {
-                    form.reset();
-                    toast.success('Project added successfully!');
-                }
-            });
+        addProject(projectData);
+
+        if (result.status === 'rejected') {
+            toast.error(result.error.message);
+        } else {
+            toast.success('Project added successfully!');
+        }
+
+        form.reset();
+        setTags([]);
     };
 
     return (
@@ -36,7 +60,7 @@ const AddProject = () => {
             <span className='section__subtitle'>Insert your live projects</span>
             <div className='contact__container container grid'>
                 <div className='contact__content'>
-                    <form onSubmit={handleSubmit} className='contact__form'>
+                    <form onSubmit={handleSubmit} onKeyDown={(e) => checkKeyDown(e)} className='contact__form'>
                         <div className='contact__form-grid'>
                             <div className='contact__form-div'>
                                 <label className='contact__form-tag'>Project Title</label>
@@ -50,25 +74,37 @@ const AddProject = () => {
                                     <option value='Full Stack'>Full Stack</option>
                                 </select>
                             </div>
-                        </div>
-                        <div className='contact__form-div'>
-                            <label className='contact__form-tag'>GitHub Link</label>
-                            <input type='text' name='gitLink' className='contact__form-input' placeholder='Enter your project github link' required />
-                        </div>
-                        <div className='contact__form-div'>
-                            <label className='contact__form-tag'>Live Link</label>
-                            <input type='text' name='liveLink' className='contact__form-input' placeholder='Enter your project live link' required />
+                            <div className='contact__form-div'>
+                                <label className='contact__form-tag'>GitHub Link</label>
+                                <input type='text' name='gitLink' className='contact__form-input' placeholder='Enter your project github link' required />
+                            </div>
+                            <div className='contact__form-div'>
+                                <label className='contact__form-tag'>Live Link</label>
+                                <input type='text' name='liveLink' className='contact__form-input' placeholder='Enter your project live link' required />
+                            </div>
                         </div>
                         <div className='contact__form-div'>
                             <label className='contact__form-tag'>Image Url</label>
                             <input type='text' name='imageUrl' className='contact__form-input' placeholder='Enter your project image url' required />
+                        </div>
+                        <div className='tags__input__container'>
+                            <label className='tags__input__title'>Tags</label>
+                            {
+                                tags.map((tag, index) =>(
+                                    <div className='tag__item' key={index}>
+                                        <span className='text'>{tag}</span>
+                                        <span className='close' onClick={() => removeTag(index)}>&times;</span>
+                                    </div>
+                                ))
+                            }
+                            <input onKeyDown={handleTags} type='text' className='tags__input' placeholder='Enter tags' />
                         </div>
                         {/* <div className='contact__form-div contact__form-area'>
                             <label className='contact__form-tag'>Image Url</label>
                             <textarea name='imageUrl' cols='30' rows='10' className='contact__form-input' placeholder='Enter your project image url' required></textarea>
                         </div> */}
                         <button type='submit' className='button button--flex button--send'>
-                            Send Message
+                            Upload
                             <svg
                                 className="button__icon"
                                 xmlns="http://www.w3.org/2000/svg"

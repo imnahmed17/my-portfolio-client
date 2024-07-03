@@ -7,8 +7,9 @@
     flex: 1 1 0%;
 }
 
-.outlet {
-    padding: 1.25rem;
+.dashboard__outlet {
+    padding-top: 2.5rem;
+    margin-left: 256px;
 }
 
 /*=============== BREAKPOINTS ===============*/
@@ -16,5 +17,9 @@
 @media screen and (max-width: 768px) {
     .dashboard__layout {
         flex-direction: column;
+    }
+
+    .dashboard__outlet {
+        margin-left: 0;
     }
 }

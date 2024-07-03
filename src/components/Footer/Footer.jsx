@@ -12,6 +12,9 @@ const Footer = () => {
                     <a href='https://www.linkedin.com/in/imnahmed17/' className='footer__social-icon' target='_blank' rel='noopener noreferrer'>
                         <i className='uil uil-linkedin'></i>
                     </a>
+                    <a href='https://www.facebook.com/imnahmed17/' className='footer__social-icon' target='_blank' rel='noopener noreferrer'>
+                        <i className='uil uil-facebook'></i>
+                    </a>
                 </div>
             </div>
         </footer>

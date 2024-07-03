@@ -7,7 +7,7 @@ const DashboardLayout = () => {
         <div className='dashboard__layout'>
             <Sidebar />
             <div className='layout-group'>
-                <div className='outlet'>
+                <div className='dashboard__outlet'>
                     <Outlet />
                 </div>
             </div>

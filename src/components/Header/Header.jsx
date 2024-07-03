@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './Header.css';
 
 const Header = () => {
@@ -34,7 +34,7 @@ const Header = () => {
     return (
         <header className='header'>
             <nav className='nav container'>
-                <a href='#home' className='nav__logo'>&lt;Noman Ahmed /&gt;</a>
+                <Link to='/' className='nav__logo'>&lt;Noman Ahmed /&gt;</Link>
                 <div className={toggle ? 'nav__menu show-menu' : 'nav__menu'}>
                     <ul className='nav__list grid'>
                         <li className='nav__item'>
@@ -75,6 +75,15 @@ const Header = () => {
                         </li>
                         <li className='nav__item'>
                             <a 
+                                href='#blogs' 
+                                onClick={() => setActiveNav('#blogs')} 
+                                className={activeNav === '#blogs' ? 'nav__link active-link' : 'nav__link'}
+                            >
+                                <i className='uil uil-blogger-alt nav__icon'></i> Blogs
+                            </a>
+                        </li>
+                        <li className='nav__item'>
+                            <a 
                                 href='#contact' 
                                 onClick={() => setActiveNav('#contact')} 
                                 className={activeNav === '#contact' ? 'nav__link active-link' : 'nav__link'}
@@ -82,14 +91,14 @@ const Header = () => {
                                 <i className='uil uil-message nav__icon'></i> Contact
                             </a>
                         </li>
-                        <li className='nav__item'>
-                            <NavLink 
-                                to='/dashboard' 
+                        {/* <li className='nav__item'>
+                            <Link 
+                                to='/dashboard/add-skill' 
                                 className='nav__link'
                             >
                                 <i className='uil uil-window-grid nav__icon'></i> Dashboard
-                            </NavLink>
-                        </li>
+                            </Link>
+                        </li> */}
                     </ul>
                     <i onClick={() => setToggle(false)} className='uil uil-times nav__close'></i>
                 </div>

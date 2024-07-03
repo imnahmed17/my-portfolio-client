@@ -31,8 +31,8 @@
 }
 
 .project__card {
-    background-color: #f6f2f2;
-    border: 1px solid rgba(0, 0, bl0ue, 0.1);
+    background-color: #f2f2f2;
+    border: 1px solid rgba(0, 0, blue, 0.1);
     padding: 1.25rem;
     border-radius: 1rem;
 }
@@ -53,6 +53,12 @@
     border-radius: 0.25rem;
 }
 
+.loader__project__img {
+    width: 100%;
+    height: 100%;
+    background-color: #dcdbdb;
+}
+
 .project__img:hover {
     object-position: bottom center;
 }
@@ -61,6 +67,30 @@
     font-size: var(--normal-font-size);
     font-weight: var(--font-medium);
     margin-bottom: var(--mb-0-5);
+}
+
+.loader__project__title {
+    height: 24px;
+    width: 50%;
+    margin-bottom: var(--mb-0-5);
+    background-color: #dcdbdb;
+}
+
+.project__tag__container {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    width: 295px;
+    height: 59px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.project__tag {
+    padding: 0 0.5rem;
+    height: fit-content;
+    background-color: #dcdbdb;
+    border-radius: 20px;
 }
 
 .project__button-group {
@@ -74,6 +104,12 @@
     display: flex;
     align-items: center;
     column-gap: 0.25rem;
+}
+
+.loader__project__button {
+    height: 24px;
+    width: 65px;
+    background-color: #dcdbdb;
 }
 
 .project__button-icon {
@@ -137,6 +173,10 @@
     }
 
     .project__figure {
+        width: 100%;
+    }
+
+    .project__tag__container {
         width: 100%;
     }
 }

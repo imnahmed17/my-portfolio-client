@@ -1,11 +1,13 @@
-import { Navigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { Navigate, useLocation } from 'react-router-dom';
+import { useCurrentToken } from '../redux/features/auth/authSlice';
 
 const PrivateRoute = ({ children }) => {
-    const email = import.meta.env.USER_EMAIL;
-    const password = import.meta.env.USER_PASSWORD;
+    const token = useSelector(useCurrentToken);
+    const location = useLocation();
 
-    if (email === '' || password === '') {
-        return <Navigate to='/' replace={true} />;
+    if (!token) {
+        return <Navigate to='/login' state={{ from: location }} replace={true} />;
     }
 
     return children;

@@ -1,10 +1,22 @@
 import { useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 import JoditEditor from 'jodit-react';
+import { useAddBlogMutation } from '../../../redux/features/blog/blogApi';
 
 const AddBlog = () => {
     const editor = useRef(null);
+    const [addBlog, result] = useAddBlogMutation();
 	const [content, setContent] = useState('');
+
+    const currentDate = new Date();
+    const day = currentDate.getDate();
+    const monthIndex = currentDate.getMonth();
+    const year = currentDate.getFullYear();
+    const monthNames = [
+        'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+        'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+    ];
+    const formattedDate = `${day} ${monthNames[monthIndex]} ${year}`;
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -13,24 +25,21 @@ const AddBlog = () => {
         const blogData = {
             title: form.title.value,
             imageUrl: form.imageUrl.value,
+            uploadedTime: formattedDate,
+            description: form.description.value,
             content
         };
 
-        fetch('https://my-portfolio-server-bay.vercel.app/blogs', {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json',
-            },
-            body: JSON.stringify(blogData)
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                if (data.insertedId) {
-                    form.reset();
-                    setContent('');
-                    toast.success('Blog added successfully!');
-                }
-            });
+        addBlog(blogData);
+
+        if (result.status === 'rejected') {
+            toast.error(result.error.message);
+        } else {
+            toast.success('Blog added successfully!');
+        }
+
+        form.reset();
+        setContent('');
     };
 
     return (
@@ -50,13 +59,17 @@ const AddBlog = () => {
                                 <input type='text' name='imageUrl' className='contact__form-input' placeholder='Enter your blog image url' required />
                             </div>
                         </div>
+                        <div className='contact__form-div'>
+                            <label className='contact__form-tag'>Blog Short Description</label>
+                            <input type='text' name='description' className='contact__form-input' placeholder='Short description . . .' required />
+                        </div>
                         <JoditEditor
                             ref={editor}
                             value={content}
                             onChange={newContent => setContent(newContent)}
                         />
                         <button type='submit' className='button button--flex button--send' style={{ marginTop: '2rem' }}>
-                            Send Message
+                            Upload
                             <svg
                                 className="button__icon"
                                 xmlns="http://www.w3.org/2000/svg"

@@ -1,6 +1,9 @@
 import toast from 'react-hot-toast';
+import { useAddSkillMutation } from '../../../redux/features/skill/skillApi';
 
 const AddSkill = () => {
+    const [addSkill, result] = useAddSkillMutation();
+    
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -11,20 +14,15 @@ const AddSkill = () => {
             category: form.category.value
         };
 
-        fetch('https://my-portfolio-server-bay.vercel.app/skills', {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json',
-            },
-            body: JSON.stringify(skillData)
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                if (data.insertedId) {
-                    form.reset();
-                    toast.success('Skill added successfully!');
-                }
-            });
+        addSkill(skillData);
+
+        if (result.status === 'rejected') {
+            toast.error(result.error.message);
+        } else {
+            toast.success('Skill added successfully!');
+        }
+
+        form.reset();
     };
 
     return (
@@ -58,7 +56,7 @@ const AddSkill = () => {
                             </div>
                             <div className='contact__form-div'>
                                 <button type='submit' className='button button--flex button--send'>
-                                    Send Message
+                                    Upload
                                     <svg
                                         className="button__icon"
                                         xmlns="http://www.w3.org/2000/svg"

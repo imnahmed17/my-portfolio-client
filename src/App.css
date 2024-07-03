@@ -129,6 +129,10 @@ img {
   margin-right: auto;
 }
 
+.outlet__container {
+  min-height: 100vh;
+}
+
 .grid {
   display: grid;
   gap: 1.5rem;

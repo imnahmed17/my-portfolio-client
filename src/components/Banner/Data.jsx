@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import "./Home.css";
+import "./Banner.css";
 import Social from "./Social";
 import sr from "../../ScrollReveal";
 import Typed from "typed.js";
@@ -13,7 +13,7 @@ const Data = () => {
         reset: true,
     };
 
-    sr.reveal(`.home__data`, config);
+    sr.reveal(`.banner__data`, config);
 
     useEffect(() => {
         const typed = new Typed(".multiple-text", {
@@ -33,8 +33,8 @@ const Data = () => {
     }, []);
 
     return (
-        <div className="home__data">
-            <h1 className="home__title">
+        <div className="banner__data">
+            <h1 className="banner__title">
                 Hi, I am <br /> Noman Ahmed
                 <svg
                     width="36"
@@ -42,7 +42,7 @@ const Data = () => {
                     viewBox="0 0 48 48"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
-                    className="home__hand"
+                    className="banner__hand"
                 >
                     <path
                         d="M25.4995 32.0305L31.3495 33.1555L36.1495 8.48051C36.4495 6.83051 35.3995 5.18051 33.8245 4.88051C32.1745 4.58051 30.5995 5.70551 30.2995 7.35551L25.4995 32.0305Z"
@@ -86,10 +86,10 @@ const Data = () => {
                     ></path>
                 </svg>
             </h1>
-            <h3 className="home__subtitle">
+            <h3 className="banner__subtitle">
                 And I am a <span className="multiple-text"></span>
             </h3>
-            <p className="home__description">
+            <p className="banner__description">
                 I&apos;m creative designer based in Bangladesh, and I&apos;m very passionate and dedicated to my work.
             </p>
             <Social />

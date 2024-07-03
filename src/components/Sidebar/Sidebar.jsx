@@ -1,9 +1,18 @@
 import { useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { logOut } from '../../redux/features/auth/authSlice';
 import './Sidebar.css';
 
 const Sidebar = () => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [toggle, setToggle] = useState(false);
+
+    const handleLogOut = () => {
+        dispatch(logOut());
+        navigate('/');
+    };
 
     return (
         <>
@@ -57,7 +66,7 @@ const Sidebar = () => {
                         <p className='text-sm'>ashiknoman17@gmail.com</p>
                     </div>
                     {/* Nav Items */}
-                    <div className='sidebar-menu__item flex flex-col justify-between flex-1 mt-6'>
+                    <div className='sidebar-menu__item'>
                         <nav>
                             <NavLink 
                                 to='/dashboard/add-skill' 
@@ -79,6 +88,11 @@ const Sidebar = () => {
                             </NavLink>
                         </nav>
                     </div>
+                </div>
+                <div className='sidebar-nav__button-container'>
+                    <button onClick={handleLogOut} className='sidebar-nav__link sidebar-nav__button'>
+                        <i className='uil uil-signout'></i> Logout
+                    </button>
                 </div>
             </div>
         </>
